@@ -440,6 +440,12 @@ SimpleSelect.toDisplayFeatures = function (state, geojson, display) {
             that.markerInteraction = false;
           });
 
+          // set draggable to true just after the marker added
+          if (geojson.properties.active === 'true') {
+            marker.setDraggable(true);
+            marker.getElement().style.backgroundColor = that.selectedMarkerColor;
+          }
+
           marker.addTo(this.map);
         }
       }
