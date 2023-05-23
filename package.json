@@ -13,14 +13,14 @@
     "docs-modes-get-and-set": "documentation readme --readme-file ./docs/MODES.md -s \"Setters and Getters\" src/modes/mode_interface_accessors.js --shallow",
     "docs-modes-life-cycle": "documentation readme --readme-file ./docs/MODES.md -s \"Life Cycle Functions\" src/modes/mode_interface.js --shallow",
     "test": "NODE_ENV=test npm run lint && npm run tape",
-    "lint": "eslint index.js src test bench",
+    "lint": "eslint index.js src test bench --fix",
     "tape": "tape -r @babel/register -r ./test/mock-browser.js test/*.test.js",
     "coverage": "NODE_ENV=test nyc --reporter html npm run tape && opener coverage/index.html",
     "build-token": "node build/generate-access-token-script.js",
-    "build": "rollup -c",
+    "build": "node build.js",
     "build-min": "rollup -c --environment MINIFY:true",
     "prepublishOnly": "run-s build build-min",
-    "watch": "rollup -c --watch",
+    "watch": "node watch.js",
     "watch-bench": "rollup -c bench/rollup.config.js --watch",
     "start-server": "st --no-cache -H 0.0.0.0 --port 9967 --index index.html .",
     "start": "run-p build-token watch watch-bench start-server"
@@ -60,6 +60,7 @@
     "@turf/bbox-clip": "^6.5.0",
     "@turf/centroid": "^6.5.0",
     "babel-plugin-istanbul": "^6.1.1",
+    "esbuild": "^0.17.19",
     "eslint": "8.32.0",
     "eslint-config-mourner": "3.0.0",
     "eslint-plugin-import": "^2.27.5",
@@ -81,6 +82,7 @@
     "@mapbox/point-geometry": "^0.1.0",
     "hat": "0.0.3",
     "lodash.isequal": "^4.5.0",
+    "maplibre-gl": "^2.4.0",
     "xtend": "^4.0.2"
   }
 }
