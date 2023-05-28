@@ -180,6 +180,16 @@ Store.prototype.select = function(featureIds, options = {}) {
 Store.prototype.deselect = function(featureIds, options = {}) {
   toDenseArray(featureIds).forEach((id) => {
     if (!this._selectedFeatureIds.has(id)) return;
+
+    // marker等のDOMで描画したものの選択を外しています
+    const feature = this.get(id);
+    if (feature.type === 'Point' && Object.hasOwn(feature.properties, 'mode') && feature.properties.mode === 'marker') {
+      const id = `marker-${feature.id}`;
+      const el = document.getElementById(id);
+      el.style.backgroundColor = feature.properties['marker-color'];
+      el.marker.setDraggable(false);
+    }
+
     this._selectedFeatureIds.delete(id);
     this._changedFeatureIds.add(id);
     if (!options.silent) {
