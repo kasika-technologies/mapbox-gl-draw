@@ -115,6 +115,16 @@ ModeInterface.prototype.addFeature = function(feature) {
  * Clear all selected features
  */
 ModeInterface.prototype.clearSelectedFeatures = function() {
+  // marker等のDOMで描画したものの選択を外す
+  this._ctx.store.getSelected().forEach((feature) => {
+    if (feature.type === 'Point' && Object.hasOwn(feature.properties, 'mode') && feature.properties.mode === 'marker') {
+      const id = `marker-${feature.id}`;
+      const el = document.getElementById(id);
+      el.style.backgroundColor = feature.properties['marker-color'];
+      el.marker.setDraggable(false);
+    }
+  });
+
   return this._ctx.store.clearSelected();
 };
 
