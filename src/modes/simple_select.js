@@ -216,6 +216,8 @@ SimpleSelect.clickOnFeature = function (state, e) {
     // Click (without shift) on an unselected feature
   } else if (!isFeatureSelected && !isShiftClick) {
     // Make it the only selected feature
+
+    // deselect already selected markers
     selectedFeatureIds.forEach((id) => {
       that.doRender(id);
 
@@ -225,6 +227,12 @@ SimpleSelect.clickOnFeature = function (state, e) {
         el.marker.setDraggable(false);
       }
     });
+
+    const el = document.getElementById(`marker-${featureId}`);
+    if (el) {
+      el.style.backgroundColor = Constants.MARKER_SELECTED_COLOR;
+      el.marker.setDraggable(true);
+    }
 
     this.setSelected(featureId);
     this.updateUIClasses({mouse: Constants.cursors.MOVE});
