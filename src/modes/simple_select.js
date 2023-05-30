@@ -9,7 +9,7 @@ import constrainFeatureMovement from '../lib/constrain_feature_movement';
 
 const SimpleSelect = {
   markerInteraction: false,
-  selectedMarkerColor: 'purple'
+  selectedMarkerColor: Constants.MARKER_SELECTED_COLOR
 };
 
 SimpleSelect.onSetup = function (opts) {
@@ -352,7 +352,7 @@ SimpleSelect.toDisplayFeatures = function (state, geojson, display) {
           el.style.backgroundColor = color;
 
           const marker = new maplibregl.Marker(el, {
-            offset: [0, -25],
+            offset: [Constants.MARKER_OFFSET_X, Constants.MARKER_OFFSET_Y],
             draggable: false,
           }).setLngLat(geojson.geometry.coordinates);
 
