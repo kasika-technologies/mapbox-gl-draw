@@ -98,3 +98,7 @@ export const LAT_MAX = 90;
 export const LAT_RENDERED_MAX = 85;
 export const LNG_MIN = -270;
 export const LNG_MAX = 270;
+
+export const MARKER_OFFSET_X = 0;
+export const MARKER_OFFSET_Y = 0;
+export const MARKER_SELECTED_COLOR = 'purple';
